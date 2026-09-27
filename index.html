@@ -12,7 +12,7 @@
 
   body {
     min-height: 100vh;
-    background: #F5EDD8 url("/dog_cd5.png") center / cover fixed no-repeat;
+    background: radial-gradient(ellipse at center, #FDF8EE 0%, #F5EDD8 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -33,7 +33,7 @@
   #splash {
     position: fixed;
     inset: 0;
-    background: #F5EDD8 url("/bg.png") center / cover no-repeat;
+    background: radial-gradient(ellipse at center, #FDF8EE 0%, #F5EDD8 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -2056,7 +2056,7 @@
 </head>
 <body>
 
-<img class="shinchan-bg" src="together.jpg" alt="">
+<img class="shinchan-bg" src="dog_cd5.png" alt="">
 <div id="eyeCareOverlay"></div>
 <button id="eyeCareBtn" onclick="toggleEyeCare()" title="护眼模式">🌙 护眼</button>
 
@@ -2162,6 +2162,7 @@
 <!-- 欢迎屏 -->
 <div id="splash" onclick="dismissSplash()">
   <p class="splash-line splash-title-cd" id="splashTitleCd"></p>
+  <img class="splash-dog" src="/bg.png" alt="欢迎页插画" />
   <p class="splash-line splash-greeting" id="splashGreeting"></p>
   <p class="splash-line splash-sub" id="splashSub"></p>
   <span class="splash-hint"><span class="pulse-dot"></span></span>
@@ -3543,6 +3544,18 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const dogImg = document.querySelector('.splash-dog');
+  function runSplash() {
+    dogImg.classList.add('ready');
+    setTimeout(() => document.getElementById('splashGreeting').classList.add('show'), 600);
+    setTimeout(() => document.getElementById('splashSub').classList.add('show'), 1100);
+  }
+  if (dogImg.complete && dogImg.naturalWidth > 0) {
+    runSplash();
+  } else {
+    dogImg.addEventListener('load', runSplash, { once: true });
+    dogImg.addEventListener('error', runSplash, { once: true });
+  }
 });
 
 
