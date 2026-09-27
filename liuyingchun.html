@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>刘迎春专属夸夸机器</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    background: radial-gradient(ellipse at center, #FDF8EE 0%, #F5EDD8 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Noto Serif SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    overflow: hidden;
+    position: relative;
+  }
+
+  canvas {
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  .machine {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 50px 40px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+    max-width: 600px;
+    width: 90%;
+    position: relative;
+    z-index: 10;
+  }
+
+  .crown {
+    font-size: 60px;
+    animation: bounce 1.5s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  h1 {
+    font-size: 28px;
+    color: #c4756a;
+    margin: 15px 0 8px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    font-family: 'Noto Serif SC', serif;
+  }
+
+  .subtitle {
+    color: #aaa;
+    font-size: 13px;
+    margin-bottom: 35px;
+  }
+
+  .quote-box {
+    background: linear-gradient(135deg, #fdf6ec, #fdf0ea);
+    border-radius: 20px;
+    padding: 38px 25px;
+    min-height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    border: 2px dashed #fbc2c2;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .quote-box::before {
+    content: '"';
+    position: absolute;
+    top: -10px; left: 10px;
+    font-size: 80px;
+    color: #fdd;
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+
+  .quote-text {
+    font-size: 18px;
+    color: #444;
+    line-height: 1.8;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .quote-text.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .action-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .btn {
+    background: linear-gradient(135deg, #ff6b9d, #ff8c42);
+    color: white;
+    border: none;
+    padding: 18px 16px;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    box-shadow: 0 8px 25px rgba(255,107,157,0.4);
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(255,107,157,0.5);
+  }
+
+  .btn:active {
+    transform: translateY(1px) scale(0.97);
+  }
+
+  .btn::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 0; height: 0;
+    background: rgba(255,255,255,0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s, height 0.4s;
+  }
+
+  .btn:active::after {
+    width: 300px; height: 300px;
+  }
+
+  @media (max-width: 640px) {
+    .action-row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .counter {
+    margin-top: 20px;
+    color: #ccc;
+    font-size: 12px;
+  }
+
+  .counter span {
+    color: #ff6b9d;
+    font-weight: bold;
+    font-size: 15px;
+  }
+
+  .floating-emoji {
+    position: fixed;
+    font-size: 28px;
+    pointer-events: none;
+    animation: floatUp 3s ease-out forwards;
+    z-index: 100;
+  }
+
+  @keyframes floatUp {
+    0%   { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+    100% { opacity: 0; transform: translateY(-200px) scale(0.5) rotate(20deg); }
+  }
+
+  .stars {
+    position: fixed;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .star {
+    position: absolute;
+    background: rgba(255,200,100,0.4);
+    border-radius: 50%;
+    animation: twinkle 3s infinite alternate;
+  }
+
+  @keyframes twinkle {
+    0% { opacity: 0.2; transform: scale(1); }
+    100% { opacity: 0.8; transform: scale(1.3); }
+  }
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+<canvas id="confetti"></canvas>
+
+<div class="machine">
+  <div class="crown">👑</div>
+  <h1>刘迎春专属夸夸机器</h1>
+  <p class="subtitle">每次点击，真理自动生成</p>
+
+  <div class="quote-box">
+    <div class="quote-text" id="quote">← 点下面那个按钮试试</div>
+  </div>
+
+  <div class="action-row">
+    <button class="btn" onclick="praise(this)">哄我</button>
+    <button class="btn" onclick="praise(this)">轻松一下</button>
+    <button class="btn" onclick="praise(this)">来点好运</button>
+  </div>
+
+  <p class="counter">已被夸了 <span id="count">0</span> 次，越夸越厉害</p>
+</div>
+
+<script>
+const quotes = [
+  "May life be gentle with you, and may happiness come easily.",
+  "你不用一直逞强，做个开心的小朋友就很好了",
+  "刘迎春今天最重要的任务，就是让自己再开心一点",
+  "希望刘迎春今天有被这个世界偷偷偏爱一点",
+  "刘迎春今天好好的，就已经很好了",
+  "你的快乐比对错重要多了",
+  "刘迎春可以慢一点点，笨一点点，懒一点点，反正还是很招人喜欢",
+  "有些人是热闹型可爱，刘迎春是越相处越觉得珍贵那种",
+  "刘迎春只要好好的，就会让人觉得很多事情都没那么糟",
+  "刘迎春可以偶尔摆烂，偶尔偷懒，偶尔什么都不想管，这也没关系",
+  "你不是没脾气，是很多时候都把情绪收起来了",
+  "你不是普通小女孩，你是限定版轻松开心小选手",
+  "今天如果有点累，就先休息一下，小朋友本来就该被温柔对待。",
+];
+
+const emojis = ['🌟','✨','🎉','🥳','💫','🌸','🎊','⭐','🔥','💖'];
+let count = 0;
+let lastIndex = -1;
+
+let lastActionBtn = null;
+
+function getActionButton(btn) {
+  return btn || lastActionBtn || document.querySelector('.btn');
+}
+
+function praise(btn) {
+  lastActionBtn = btn || null;
+  let index;
+  do { index = Math.floor(Math.random() * quotes.length); }
+  while (index === lastIndex);
+  lastIndex = index;
+
+  const el = document.getElementById('quote');
+  el.classList.remove('show');
+  setTimeout(() => {
+    el.textContent = quotes[index];
+    el.classList.add('show');
+  }, 150);
+
+  count++;
+  document.getElementById('count').textContent = count;
+
+  launchConfetti();
+  spawnEmojis(btn);
+}
+
+function spawnEmojis(btn) {
+  const anchorBtn = getActionButton(btn);
+  const rect = anchorBtn.getBoundingClientRect();
+  for (let i = 0; i < 6; i++) {
+    setTimeout(() => {
+      const el = document.createElement('div');
+      el.className = 'floating-emoji';
+      el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      el.style.left = (rect.left + Math.random() * rect.width) + 'px';
+      el.style.top = (rect.top - 10) + 'px';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 3000);
+    }, i * 80);
+  }
+}
+
+// Confetti
+const canvas = document.getElementById('confetti');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+let particles = [];
+
+function launchConfetti() {
+  for (let i = 0; i < 80; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: -10,
+      r: Math.random() * 8 + 4,
+      color: `hsl(${Math.random()*360},90%,65%)`,
+      speed: Math.random() * 4 + 2,
+      angle: Math.random() * 360,
+      spin: (Math.random() - 0.5) * 5,
+      drift: (Math.random() - 0.5) * 2,
+      shape: Math.random() > 0.5 ? 'rect' : 'circle',
+    });
+  }
+  if (particles.length === 80) requestAnimationFrame(animateConfetti);
+}
+
+function animateConfetti() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles = particles.filter(p => p.y < canvas.height + 20);
+  particles.forEach(p => {
+    p.y += p.speed;
+    p.x += p.drift;
+    p.angle += p.spin;
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.angle * Math.PI / 180);
+    ctx.fillStyle = p.color;
+    if (p.shape === 'rect') {
+      ctx.fillRect(-p.r/2, -p.r/4, p.r, p.r/2);
+    } else {
+      ctx.beginPath();
+      ctx.arc(0, 0, p.r/2, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.restore();
+  });
+  if (particles.length > 0) requestAnimationFrame(animateConfetti);
+}
+
+// Background stars
+const starsEl = document.getElementById('stars');
+for (let i = 0; i < 20; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const size = Math.random() * 6 + 3;
+  s.style.cssText = `
+    width:${size}px; height:${size}px;
+    left:${Math.random()*100}%;
+    top:${Math.random()*100}%;
+    animation-delay:${Math.random()*3}s;
+    animation-duration:${2+Math.random()*3}s;
+  `;
+  starsEl.appendChild(s);
+}
+
+// Show first quote on load with a cheeky one
+setTimeout(() => {
+  const el = document.getElementById('quote');
+  el.textContent = '← 点下面那个按钮试试';
+  el.classList.add('show');
+}, 300);
+</script>
+</body>
+</html>
