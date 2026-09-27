@@ -19,7 +19,7 @@ export async function onRequestOptions() {
 }
 
 export async function onRequestGet({ env }) {
-  const raw = await env.LIUYINGCHUN_MOOD_KV.get('whack_plays');
+  const raw = await env.ZHANGLING_MOOD_KV.get('whack_plays');
   const plays = raw ? JSON.parse(raw) : [];
   return new Response(JSON.stringify(plays), {
     headers: { 'Content-Type': 'application/json', ...CORS },
@@ -32,10 +32,10 @@ export async function onRequestPost({ env, request }) {
   const time = getBeijingTime();
   const city = request.cf?.city || request.cf?.region || '未知';
 
-  const raw = await env.LIUYINGCHUN_MOOD_KV.get('whack_plays');
+  const raw = await env.ZHANGLING_MOOD_KV.get('whack_plays');
   const plays = raw ? JSON.parse(raw) : [];
   plays.push({ date, time, city, score });
-  await env.LIUYINGCHUN_MOOD_KV.put('whack_plays', JSON.stringify(plays));
+  await env.ZHANGLING_MOOD_KV.put('whack_plays', JSON.stringify(plays));
 
   return new Response(JSON.stringify({ ok: true }), {
     headers: { 'Content-Type': 'application/json', ...CORS },

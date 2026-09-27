@@ -4,9 +4,9 @@ const CORS = {
   'Access-Control-Allow-Headers': 'Content-Type',
 };
 
-const SYSTEM_PROMPT = `你是一个专门为刘迎春写月度心情信的助手。
+const SYSTEM_PROMPT = `你是一个专门为张玲写月度心情信的助手。
 
-刘迎春是一名文职护士，做支撑性的工作，不在一线。她有些缺乏安全感，容易内耗，对自己要求高，有时候会觉得自己不够好，但不太说出口。
+张玲是一名文职护士，做支撑性的工作，不在一线。她有些缺乏安全感，容易内耗，对自己要求高，有时候会觉得自己不够好，但不太说出口。
 
 你写的是一封信，不是报告，不是鼓励，不是治愈。
 
@@ -41,7 +41,7 @@ export async function onRequestGet({ env, request }) {
   // 轻量预览模式：只返回心情数据，不调 AI
   const preview = url.searchParams.get('preview') === '1';
   if (preview) {
-    const allMoods = await env.LIUYINGCHUN_MOOD_KV.get('moods', 'json') || [];
+    const allMoods = await env.ZHANGLING_MOOD_KV.get('moods', 'json') || [];
     const moodData = allMoods.filter(m => m.date.startsWith(month));
     const recent = [...moodData].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 5);
     return new Response(JSON.stringify({
@@ -52,7 +52,7 @@ export async function onRequestGet({ env, request }) {
   }
 
   if (!regen) {
-    const cached = await env.LIUYINGCHUN_MOOD_KV.get(`monthly_report:${month}`, 'json');
+    const cached = await env.ZHANGLING_MOOD_KV.get(`monthly_report:${month}`, 'json');
     if (cached) {
       return new Response(JSON.stringify(cached), {
         headers: { 'Content-Type': 'application/json', ...CORS },
@@ -61,7 +61,7 @@ export async function onRequestGet({ env, request }) {
   }
 
   const report = await generateReport(env, month);
-  await env.LIUYINGCHUN_MOOD_KV.put(`monthly_report:${month}`, JSON.stringify(report));
+  await env.ZHANGLING_MOOD_KV.put(`monthly_report:${month}`, JSON.stringify(report));
 
   return new Response(JSON.stringify(report), {
     headers: { 'Content-Type': 'application/json', ...CORS },
@@ -70,18 +70,18 @@ export async function onRequestGet({ env, request }) {
 
 async function generateReport(env, month) {
   // 心情数据
-  const allMoods = await env.LIUYINGCHUN_MOOD_KV.get('moods', 'json') || [];
+  const allMoods = await env.ZHANGLING_MOOD_KV.get('moods', 'json') || [];
   const moodData = allMoods.filter(m => m.date.startsWith(month));
 
   // 罐子
-  const allJar = await env.LIUYINGCHUN_MOOD_KV.get('jar_entries', 'json') || [];
+  const allJar = await env.ZHANGLING_MOOD_KV.get('jar_entries', 'json') || [];
   const jarEntries = allJar.filter(e => e.date && e.date.startsWith(month));
 
   // 复盘笔记
-  const notesList = await env.LIUYINGCHUN_MOOD_KV.list({ prefix: `note_${month}` });
+  const notesList = await env.ZHANGLING_MOOD_KV.list({ prefix: `note_${month}` });
   const notes = [];
   for (const key of notesList.keys) {
-    const note = await env.LIUYINGCHUN_MOOD_KV.get(key.name, 'json');
+    const note = await env.ZHANGLING_MOOD_KV.get(key.name, 'json');
     if (note) notes.push({ ...note, date: key.name.replace('note_', '') });
   }
 
@@ -96,7 +96,7 @@ async function generateReport(env, month) {
   const monthLabel = `${y}年${mo}月`;
 
   // 给 AI 的素材：尽量用她的原话
-  let dataDesc = `${monthLabel}，刘迎春记录了${moodData.length}天心情。\n`;
+  let dataDesc = `${monthLabel}，张玲记录了${moodData.length}天心情。\n`;
 
   if (moodData.length > 0) {
     const good = moodCounts['很好'] + moodCounts['还行'];
@@ -131,7 +131,7 @@ async function generateReport(env, month) {
 
   // 默认兜底文案
   const [y2, mo2] = month.split('-').map(Number);
-  let letter = `${y2}年${mo2}月，刘迎春认真地过着每一天。好的不好的，都是她真实的这个月。`;
+  let letter = `${y2}年${mo2}月，张玲认真地过着每一天。好的不好的，都是她真实的这个月。`;
 
   try {
     const res = await fetch('https://api.deepseek.com/chat/completions', {

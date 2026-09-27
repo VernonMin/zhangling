@@ -15,7 +15,7 @@ export async function onRequestOptions() {
 
 export async function onRequestGet({ env }) {
   const date = getBeijingDate();
-  const count = parseInt(await env.LIUYINGCHUN_MOOD_KV.get(`count_${date}`) || '0');
+  const count = parseInt(await env.ZHANGLING_MOOD_KV.get(`count_${date}`) || '0');
   return new Response(JSON.stringify({ date, count }), {
     headers: { 'Content-Type': 'application/json', ...CORS },
   });
@@ -23,9 +23,9 @@ export async function onRequestGet({ env }) {
 
 export async function onRequestPost({ env }) {
   const date = getBeijingDate();
-  const current = parseInt(await env.LIUYINGCHUN_MOOD_KV.get(`count_${date}`) || '0');
+  const current = parseInt(await env.ZHANGLING_MOOD_KV.get(`count_${date}`) || '0');
   const count = current + 1;
-  await env.LIUYINGCHUN_MOOD_KV.put(`count_${date}`, String(count));
+  await env.ZHANGLING_MOOD_KV.put(`count_${date}`, String(count));
   return new Response(JSON.stringify({ date, count }), {
     headers: { 'Content-Type': 'application/json', ...CORS },
   });

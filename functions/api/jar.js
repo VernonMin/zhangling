@@ -20,10 +20,10 @@ export async function onRequestOptions() {
 
 export async function onRequestPost({ env, request }) {
   const { text } = await request.json();
-  const raw = await env.LIUYINGCHUN_MOOD_KV.get('jar_entries');
+  const raw = await env.ZHANGLING_MOOD_KV.get('jar_entries');
   const entries = raw ? JSON.parse(raw) : [];
   entries.unshift({ text, date: getBeijingDate(), time: getBeijingTime() });
-  await env.LIUYINGCHUN_MOOD_KV.put('jar_entries', JSON.stringify(entries));
+  await env.ZHANGLING_MOOD_KV.put('jar_entries', JSON.stringify(entries));
   return new Response(JSON.stringify({ ok: true }), {
     headers: { 'Content-Type': 'application/json', ...CORS },
   });

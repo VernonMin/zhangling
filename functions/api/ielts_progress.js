@@ -14,7 +14,7 @@ const LEVEL_SPECS = [
 ];
 
 const PRAISE_LINES = [
-  '刘迎春真棒',
+  '张玲真棒',
 ];
 
 function getBeijingDate() {
@@ -138,7 +138,7 @@ function buildResponse(data) {
     date: today,
     done: studyDates.includes(today),
     note: studyDates.includes(today)
-      ? `今天已经学到 ${currentLevel?.title || '词汇'} 了，迎春继续稳稳地往前走。`
+      ? `今天已经学到 ${currentLevel?.title || '词汇'} 了，玲继续稳稳地往前走。`
       : '',
   };
 
@@ -167,11 +167,11 @@ function buildResponse(data) {
 }
 
 async function loadData(env) {
-  const raw = await env.LIUYINGCHUN_MOOD_KV.get(KV_KEY, 'json');
+  const raw = await env.ZHANGLING_MOOD_KV.get(KV_KEY, 'json');
   const normalized = normalizeData(raw);
   if (normalized.__needsSave) {
     const { __needsSave, ...saveData } = normalized;
-    await env.LIUYINGCHUN_MOOD_KV.put(KV_KEY, JSON.stringify(saveData));
+    await env.ZHANGLING_MOOD_KV.put(KV_KEY, JSON.stringify(saveData));
     return saveData;
   }
   return normalized;
@@ -215,7 +215,7 @@ export async function onRequestPost({ env, request }) {
   data.checkins = [...new Set(data.checkins)].sort().slice(-180);
   data.updatedAt = getBeijingTimestamp();
 
-  await env.LIUYINGCHUN_MOOD_KV.put(KV_KEY, JSON.stringify(data));
+  await env.ZHANGLING_MOOD_KV.put(KV_KEY, JSON.stringify(data));
 
   const response = buildResponse(data);
   const praised = prevStatus !== 'done' && status === 'done';

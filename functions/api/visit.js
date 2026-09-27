@@ -37,10 +37,10 @@ export async function onRequestPost({ env, request }) {
   const ua = parseUA(request.headers.get('User-Agent') || '');
 
   const key = `visit_${date}`;
-  const raw = await env.LIUYINGCHUN_MOOD_KV.get(key);
+  const raw = await env.ZHANGLING_MOOD_KV.get(key);
   const entries = raw ? JSON.parse(raw) : [];
   entries.push({ time, city, ua });
-  await env.LIUYINGCHUN_MOOD_KV.put(key, JSON.stringify(entries));
+  await env.ZHANGLING_MOOD_KV.put(key, JSON.stringify(entries));
 
   return new Response(JSON.stringify({ ok: true }), {
     headers: { 'Content-Type': 'application/json', ...CORS },

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>发消息给迎春</title>
+<title>发消息给玲</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -114,10 +114,10 @@
 </head>
 <body>
 <div class="card">
-  <h1>发消息给迎春</h1>
+  <h1>发消息给玲</h1>
 
   <label>标题</label>
-  <input id="title" type="text" value="刘迎春的开心小角落" placeholder="通知标题">
+  <input id="title" type="text" value="张玲的夸夸机" placeholder="通知标题">
 
   <label>内容</label>
   <div class="presets">
@@ -178,7 +178,7 @@ async function send() {
   status.textContent = '发送中…';
 
   try {
-    const res = await fetch('https://liuyingchun.com/api/push-send', {
+    const res = await fetch('/api/push-send', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ title, body, secret }),

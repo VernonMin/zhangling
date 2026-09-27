@@ -116,7 +116,7 @@ export async function onRequestPost({ env, request }) {
     return new Response(JSON.stringify({ error: 'unauthorized' }), { status: 401, headers: { 'Content-Type': 'application/json', ...CORS } });
   }
 
-  const subJson = await env.LIUYINGCHUN_MOOD_KV.get('push_subscriptions');
+  const subJson = await env.ZHANGLING_MOOD_KV.get('push_subscriptions');
   if (!subJson) {
     return new Response(JSON.stringify({ error: 'no subscription' }), { status: 404, headers: { 'Content-Type': 'application/json', ...CORS } });
   }
@@ -125,7 +125,7 @@ export async function onRequestPost({ env, request }) {
     return new Response(JSON.stringify({ error: 'no subscription' }), { status: 404, headers: { 'Content-Type': 'application/json', ...CORS } });
   }
 
-  const payload = JSON.stringify({ title: title || '刘迎春的开心小角落', body: body || '' });
+  const payload = JSON.stringify({ title: title || '张玲的夸夸机', body: body || '' });
 
   const results = await Promise.all(subs.map(async sub => {
     try {

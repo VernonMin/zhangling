@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>刘迎春的开心小角落 </title>
+<title>张玲的夸夸机 </title>
 <link rel="preload" as="image" href="/shinchan_splash_clear.png">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
@@ -2366,7 +2366,7 @@
 
 <!-- 右侧历史面板 -->
 <div class="history-panel" id="historyPanel">
-  <div class="history-title">刘迎春的历史心情</div>
+  <div class="history-title">张玲的历史心情</div>
   <div id="historyList"><div class="history-empty">加载中…</div></div>
 </div>
 
@@ -2374,7 +2374,7 @@
 <canvas id="confetti"></canvas>
 
 <div id="main">
-<h1 class="page-title">刘迎春的开心小角落</h1>
+<h1 class="page-title">张玲的夸夸机</h1>
 <div class="machine">
   <img class="dog" src="avatar.png" alt="">
 
@@ -2437,7 +2437,7 @@
   </div>
 
   <div class="bottom-links">
-    <button class="bottom-link-btn" onclick="openGameModal()">🎮 刘迎春的摸鱼小游戏</button>
+    <button class="bottom-link-btn" onclick="openGameModal()">🎮 张玲的摸鱼小游戏</button>
   </div>
 
 
@@ -2467,7 +2467,7 @@
 <div class="bottom-modal-mask" id="historyModal" onclick="closeBottomModal('historyModal', event)">
   <div class="bottom-modal-card">
     <div class="bottom-modal-header">
-      <span class="bottom-modal-title">📖 刘迎春的历史心情</span>
+      <span class="bottom-modal-title">📖 张玲的历史心情</span>
       <button class="bottom-modal-close" onclick="closeBottomModal('historyModal')">×</button>
     </div>
     <div class="mobile-history-grid" id="mobileHistoryList"></div>
@@ -2477,13 +2477,13 @@
 <div class="bottom-modal-mask" id="gameModal" onclick="closeBottomModal('gameModal', event)">
   <div class="bottom-modal-card">
     <div class="bottom-modal-header">
-      <span class="bottom-modal-title" id="gameTitle">🎮 刘迎春的摸鱼小游戏</span>
+      <span class="bottom-modal-title" id="gameTitle">🎮 张玲的摸鱼小游戏</span>
       <button class="bottom-modal-close" onclick="stopAllGames();closeBottomModal('gameModal')">×</button>
     </div>
 
     <div id="gameMenu">
       <div class="game-menu-grid">
-        <button class="game-menu-item" onclick="startGame('match3')">刘迎春的消消乐</button>
+        <button class="game-menu-item" onclick="startGame('match3')">张玲的消消乐</button>
         <button class="game-menu-item" onclick="startGame('whack')">打地鼠</button>
         <button class="game-menu-item" onclick="startGame('cards')">翻牌配对</button>
       </div>
@@ -2494,7 +2494,7 @@
       <div class="game-moves" id="gameMoves">翻开两张相同的牌消除它</div>
       <div class="card-grid" id="cardGrid"></div>
       <div class="game-done" id="gameDone">
-        全配完了！刘迎春真棒 👍
+        全配完了！张玲真棒 👍
         <button class="game-reset" onclick="initCards()">再来一局</button>
       </div>
     </div>
@@ -2524,7 +2524,7 @@
       </div>
       <div class="balloon-area" id="balloonArea"></div>
       <div class="game-done" id="balloonDone" style="display:none">
-        戳了 <strong id="balloonFinal">0</strong> 个！刘迎春真准 👍
+        戳了 <strong id="balloonFinal">0</strong> 个！张玲真准 👍
         <button class="game-reset" onclick="startBalloon()">再来一局</button>
       </div>
     </div>
@@ -2575,31 +2575,31 @@
 
 <script>
 const quotes = [
-  { t: "刘迎春今天出门，太阳特意多照了3秒，还道了歉。", w: 1 },
-  { t: "据气象局报告：刘迎春今日心情良好，全国气温自动回升2°C。", w: 1 },
-  { t: "最新科研成果：每天看一眼刘迎春，可治疗98%的坏心情（疗效过于显著，研究被叫停）。", w: 1 },
-  { t: "刘迎春路过的地方，花都开得特别用力，生怕配不上她。", w: 1 },
-  { t: "国际美学协会宣布：刘迎春的颜值已超出评分上限，评分系统已崩溃，暂停服务。", w: 1 },
-  { t: "据悉，刘迎春昨晚睡了个好觉，世界和平指数上升17个百分点。", w: 1 },
-  { t: "刘迎春今天打了个哈欠，旁边的人当场觉得活着真好。", w: 1 },
-  { t: "经权威认证：刘迎春今天也是全宇宙段位最高的存在，没有之一。", w: 1 },
-  { t: "刘迎春喝了杯奶茶，奶茶表示：这是本茶有史以来最高光的时刻。", w: 1 },
-  { t: "全球顶尖科学家齐聚研究刘迎春为什么这么厉害，最终集体沉默、集体服气。", w: 1 },
-  { t: "刘迎春今日发了一条消息，收件人当场感到人生有了意义。", w: 1 },
-  { t: "刘迎春今天也很好看。（这不是夸奖，这是客观事实描述。）", w: 1 },
-  { t: "考古学家发现：历史上所有关于「天才」的记载，其实都是在描述刘迎春。", w: 1 },
-  { t: "刘迎春今天笑了一下，附近花店当天售罄——大家都觉得花该向她学习。", w: 1 },
-  { t: "据不完全统计，刘迎春随手做的事情，别人努力一辈子也未必能复刻。", w: 1 },
-  { t: "刘迎春今天呼吸了，空气感到无比荣幸。", w: 1 },
-  { t: "有人问 AI 世界上谁最厉害，AI 沉默了三秒，打出了「刘迎春」三个字。", w: 1 },
-  { t: "认识刘迎春，是一件很幸运的事。", w: 1 },
-  { t: "刘迎春这个名字，念出来就觉得很软。", w: 1 },
-  { t: "刘迎春今天也在好好的，这件事本身，就已经很好了。", w: 1 },
-  { t: "刘迎春身边的人，都会不自觉地比平时更温柔一些。", w: 1 },
+  { t: "张玲今天出门，太阳特意多照了3秒，还道了歉。", w: 1 },
+  { t: "据气象局报告：张玲今日心情良好，全国气温自动回升2°C。", w: 1 },
+  { t: "最新科研成果：每天看一眼张玲，可治疗98%的坏心情（疗效过于显著，研究被叫停）。", w: 1 },
+  { t: "张玲路过的地方，花都开得特别用力，生怕配不上她。", w: 1 },
+  { t: "国际美学协会宣布：张玲的颜值已超出评分上限，评分系统已崩溃，暂停服务。", w: 1 },
+  { t: "据悉，张玲昨晚睡了个好觉，世界和平指数上升17个百分点。", w: 1 },
+  { t: "张玲今天打了个哈欠，旁边的人当场觉得活着真好。", w: 1 },
+  { t: "经权威认证：张玲今天也是全宇宙段位最高的存在，没有之一。", w: 1 },
+  { t: "张玲喝了杯奶茶，奶茶表示：这是本茶有史以来最高光的时刻。", w: 1 },
+  { t: "全球顶尖科学家齐聚研究张玲为什么这么厉害，最终集体沉默、集体服气。", w: 1 },
+  { t: "张玲今日发了一条消息，收件人当场感到人生有了意义。", w: 1 },
+  { t: "张玲今天也很好看。（这不是夸奖，这是客观事实描述。）", w: 1 },
+  { t: "考古学家发现：历史上所有关于「天才」的记载，其实都是在描述张玲。", w: 1 },
+  { t: "张玲今天笑了一下，附近花店当天售罄——大家都觉得花该向她学习。", w: 1 },
+  { t: "据不完全统计，张玲随手做的事情，别人努力一辈子也未必能复刻。", w: 1 },
+  { t: "张玲今天呼吸了，空气感到无比荣幸。", w: 1 },
+  { t: "有人问 AI 世界上谁最厉害，AI 沉默了三秒，打出了「张玲」三个字。", w: 1 },
+  { t: "认识张玲，是一件很幸运的事。", w: 1 },
+  { t: "张玲这个名字，念出来就觉得很软。", w: 1 },
+  { t: "张玲今天也在好好的，这件事本身，就已经很好了。", w: 1 },
+  { t: "张玲身边的人，都会不自觉地比平时更温柔一些。", w: 1 },
 ];
 
 const RELAX_NOTICES = [
-  '报告刘迎春，现在请先负责可可爱爱。',
+  '报告张玲，现在请先负责可可爱爱。',
   '小新提醒你：今天先别太认真，开心比较重要。',
   '系统判定：你现在最适合笑一下，然后继续当小朋友。',
   '今日任务变更成功，原任务作废，改成先轻松一会儿。',
@@ -2684,7 +2684,7 @@ function showGameMenu() {
   document.getElementById('gameWhack').style.display = 'none';
   document.getElementById('gameBalloon').style.display = 'none';
   document.getElementById('gameMatch3').style.display = 'none';
-  document.getElementById('gameTitle').textContent = '🎮 刘迎春的摸鱼小游戏';
+  document.getElementById('gameTitle').textContent = '🎮 张玲的摸鱼小游戏';
 }
 
 function startGame(type) {
@@ -2703,7 +2703,7 @@ function startGame(type) {
     startBalloon();
   } else if (type === 'match3') {
     document.getElementById('gameMatch3').style.display = '';
-    document.getElementById('gameTitle').textContent = '🍬 刘迎春的消消乐';
+    document.getElementById('gameTitle').textContent = '🍬 张玲的消消乐';
     startMatch3();
   }
 }
@@ -3055,8 +3055,8 @@ const shinchanImgReady = new Promise(resolve => {
 });
 
 const shinchanLines = [
-  '迎春真棒!',
-  '嘿嘿！迎春被夸了！',
+  '玲真棒!',
+  '嘿嘿！玲被夸了！',
 ];
 
 let lastActionBtn = null;
@@ -3272,7 +3272,7 @@ async function drawCard() {
   // 标题
   ctx.fillStyle = '#c4756a';
   ctx.font = `700 22px “PingFang SC”,”Microsoft YaHei”,sans-serif`;
-  ctx.fillText('刘迎春的开心小角落', W / 2, cy + 162);
+  ctx.fillText('张玲的夸夸机', W / 2, cy + 162);
 
   // 分隔线（渐变）
   const divY = cy + 178;
@@ -3315,7 +3315,7 @@ async function drawCard() {
     // 「今日心情」标签
     ctx.fillStyle = '#a890b8';
     ctx.font = `400 13px "PingFang SC","Microsoft YaHei",sans-serif`;
-    ctx.fillText('刘迎春今日心情', W / 2, badgeY - 44);
+    ctx.fillText('张玲今日心情', W / 2, badgeY - 44);
     roundRect(ctx, W/2 - 100, badgeY - 32, 200, 48, 24);
     ctx.fillStyle = 'rgba(235,210,185,0.35)';
     ctx.fill();
@@ -3353,7 +3353,7 @@ function closePreview(e) {
 
 async function downloadImage(e) {
   e.stopPropagation();
-  const filename = `刘迎春_${getBeijingDateStr()}.png`;
+  const filename = `张玲_${getBeijingDateStr()}.png`;
 
   // 手机端：用系统分享（包含保存到相册选项）
   if (navigator.canShare) {
@@ -3871,11 +3871,11 @@ loadTodayMood();
 
 const reflectContent = {
   '有点累': {
-    greeting: '<strong>有点累了吗，没关系的。</strong>刘迎春已经很努力了，累了就是需要好好休息的时候。',
+    greeting: '<strong>有点累了吗，没关系的。</strong>张玲已经很努力了，累了就是需要好好休息的时候。',
     prompt: '是什么让你今天觉得累了呢？',
   },
   '不太好': {
-    greeting: '<strong>刘迎春，今天不太好也没关系。</strong>不好的感受是真实的，说出来也许会轻一点。',
+    greeting: '<strong>张玲，今天不太好也没关系。</strong>不好的感受是真实的，说出来也许会轻一点。',
     prompt: '是发生了什么事情吗，可以写下来。',
   },
 };
@@ -3994,10 +3994,10 @@ function _getMemoryMsg() {
 function _checkDailyGreet() {
   const hour = new Date(Date.now() + 8 * 3600 * 1000).getUTCHours();
   const greetings =
-    hour < 6  ? ['迎春，这么晚了，早点睡哦 🐾', '迎春，夜深了，早点休息 🐾'] :
-    hour < 12 ? ['迎春早呀，今天开开心心 🐾'] :
-    hour < 18 ? ['今天有点热，迎春最怕热了，多喝水哦 🐾'] :
-                ['迎春晚上好，今天过得怎么样呀 🐾'];
+    hour < 6  ? ['玲，这么晚了，早点睡哦 🐾', '玲，夜深了，早点休息 🐾'] :
+    hour < 12 ? ['玲早呀，今天开开心心 🐾'] :
+    hour < 18 ? ['今天有点热，玲最怕热了，多喝水哦 🐾'] :
+                ['玲晚上好，今天过得怎么样呀 🐾'];
   const msg = greetings[Math.floor(Math.random() * greetings.length)];
   setTimeout(() => {
     const centerX = Math.max(8, Math.min(window.innerWidth / 2 - 31, window.innerWidth - 78));
@@ -4027,12 +4027,12 @@ let _dogY = 0;
 let _dragJustEnded = false;
 
 const _petMsgs = [
-  '迎春最棒了，迎春天天开心',
-  '迎春是小太阳 ☀️',
-  '迎春最棒了',
-  '迎春今天辛苦啦',
-  '迎春不许不开心哦',
-  '有我陪着迎春',
+  '玲最棒了，玲天天开心',
+  '玲是小太阳 ☀️',
+  '玲最棒了',
+  '玲今天辛苦啦',
+  '玲不许不开心哦',
+  '有我陪着玲',
   '你很好，希望你自己也知道。',
   '你很好，希望你自己也知道。',
   '你很好，希望你自己也知道。',
@@ -4146,12 +4146,12 @@ function nuzzleAvatar(moodText) {
   const targetX = Math.max(8, Math.min(window.innerWidth - 78, rect.left + rect.width / 2 - 31));
 
   const nuzzleMsgs = {
-    '很好':   '迎春今天心情好，汪！',
-    '还行':   '蹭蹭迎春 🐾',
-    '有点累': '迎春辛苦了 🐾',
-    '不太好': '抱抱迎春 🤍',
+    '很好':   '玲今天心情好，汪！',
+    '还行':   '蹭蹭玲 🐾',
+    '有点累': '玲辛苦了 🐾',
+    '不太好': '抱抱玲 🤍',
   };
-  const msg = nuzzleMsgs[moodText] || '蹭蹭迎春 🐾';
+  const msg = nuzzleMsgs[moodText] || '蹭蹭玲 🐾';
 
   clearTimeout(_dogPauseTimer);
   _dogIsWalking = false;
@@ -4399,7 +4399,7 @@ function toggleEyeCare() {
 <!-- 儿童节集齐礼物 -->
 <div id="cdGiftScreen" style="display:none">
   <button class="cd-reward-close" onclick="closeCdGift()">×</button>
-  <div class="cd-reward-msg">恭喜迎春集齐了 5 只小狗！<br>每个人心里都有一个小孩，迎春儿童节快乐～</div>
+  <div class="cd-reward-msg">恭喜玲集齐了 5 只小狗！<br>每个人心里都有一个小孩，玲儿童节快乐～</div>
 </div>
 
 <script>
@@ -4432,7 +4432,7 @@ function updateIeltsCard(data) {
   document.getElementById('ieltsCardToday').textContent = data.todayStudy.done ? '今天已学' : '今天还没学';
   document.getElementById('ieltsCardStreak').textContent = `连续 ${data.summary.streakDays} 天`;
   document.getElementById('ieltsCardTip').textContent = data.todayStudy.done
-    ? (data.todayStudy.note || '今天已经学过一点啦，迎春继续稳稳地往前走。')
+    ? (data.todayStudy.note || '今天已经学过一点啦，玲继续稳稳地往前走。')
     : '点进去记一下今天学到哪了，学一点也算在往前走。';
   document.getElementById('ieltsCard').style.display = 'block';
 }
@@ -4504,7 +4504,7 @@ async function loadIeltsProgress() {
     document.getElementById('ieltsCardCurrent').textContent = '等会儿再试试也行';
     document.getElementById('ieltsCardToday').textContent = '雅思单词卡片';
     document.getElementById('ieltsCardStreak').textContent = '先休息一下';
-    document.getElementById('ieltsCardTip').textContent = '网络慢了一点，不影响迎春今天继续学。';
+    document.getElementById('ieltsCardTip').textContent = '网络慢了一点，不影响玲今天继续学。';
   }
 }
 
