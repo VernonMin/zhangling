@@ -22,7 +22,7 @@ export async function onRequestPost({ env, request }) {
   const { text, mood } = await request.json();
   const date = getBeijingDate();
   const time = getBeijingTime();
-  await env.ZHANGLING_MOOD_KV.put(`note_${date}`, JSON.stringify({ text, mood, time }));
+  await env.ZHANGLING_KV.put(`note_${date}`, JSON.stringify({ text, mood, time }));
   return new Response(JSON.stringify({ ok: true }), {
     headers: { 'Content-Type': 'application/json', ...CORS },
   });

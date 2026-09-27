@@ -17,7 +17,7 @@ export async function onRequestOptions() {
 }
 
 export async function onRequestGet({ env }) {
-  const moods = await env.ZHANGLING_MOOD_KV.get('moods', 'json') || [];
+  const moods = await env.ZHANGLING_KV.get('moods', 'json') || [];
   return new Response(JSON.stringify(moods), {
     headers: { 'Content-Type': 'application/json', ...CORS },
   });
@@ -27,7 +27,7 @@ export async function onRequestPost({ request, env }) {
   const { mood, emoji } = await request.json();
   const { date, time } = getBeijingDate();
 
-  const moods = await env.ZHANGLING_MOOD_KV.get('moods', 'json') || [];
+  const moods = await env.ZHANGLING_KV.get('moods', 'json') || [];
   const idx = moods.findIndex(m => m.date === date);
   const entry = { date, time, mood, emoji };
 
@@ -36,7 +36,7 @@ export async function onRequestPost({ request, env }) {
 
   moods.splice(60); // 保留最近60天
 
-  await env.ZHANGLING_MOOD_KV.put('moods', JSON.stringify(moods));
+  await env.ZHANGLING_KV.put('moods', JSON.stringify(moods));
   return new Response(JSON.stringify({ ok: true }), {
     headers: { 'Content-Type': 'application/json', ...CORS },
   });

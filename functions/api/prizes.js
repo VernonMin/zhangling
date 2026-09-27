@@ -13,10 +13,10 @@ export async function onRequestOptions() {
 
 // GET：返回全部战利品，首次调用时自动迁移旧 520 记录
 export async function onRequestGet({ env }) {
-  let prizes = await env.ZHANGLING_MOOD_KV.get(KV_KEY, 'json') || [];
+  let prizes = await env.ZHANGLING_KV.get(KV_KEY, 'json') || [];
 
   // 一次性迁移：把旧 lottery520_result 写入 prizes_list 并删除
-  const legacy = await env.ZHANGLING_MOOD_KV.get(LEGACY_KEY, 'json');
+  const legacy = await env.ZHANGLING_KV.get(LEGACY_KEY, 'json');
   if (legacy && legacy.prize) {
     const alreadyIn = prizes.some(
       p => p.activity === '五月礼遇' && p.prize === legacy.prize
@@ -29,8 +29,8 @@ export async function onRequestGet({ env }) {
         ...prizes,
       ];
       // 永久写入新结构，删除旧 key
-      await env.ZHANGLING_MOOD_KV.put(KV_KEY, JSON.stringify(prizes));
-      await env.ZHANGLING_MOOD_KV.delete(LEGACY_KEY);
+      await env.ZHANGLING_KV.put(KV_KEY, JSON.stringify(prizes));
+      await env.ZHANGLING_KV.delete(LEGACY_KEY);
     }
   }
 
@@ -49,9 +49,9 @@ export async function onRequestPost({ request, env }) {
     });
   }
 
-  const prizes = await env.ZHANGLING_MOOD_KV.get(KV_KEY, 'json') || [];
+  const prizes = await env.ZHANGLING_KV.get(KV_KEY, 'json') || [];
   prizes.push({ activity, prize, date: date || '', slogan: slogan || '' });
-  await env.ZHANGLING_MOOD_KV.put(KV_KEY, JSON.stringify(prizes));
+  await env.ZHANGLING_KV.put(KV_KEY, JSON.stringify(prizes));
 
   return new Response(JSON.stringify({ ok: true }), {
     headers: { 'Content-Type': 'application/json', ...CORS },

@@ -116,7 +116,7 @@ export async function onRequestPost({ env, request }) {
     return new Response(JSON.stringify({ error: 'unauthorized' }), { status: 401, headers: { 'Content-Type': 'application/json', ...CORS } });
   }
 
-  const subJson = await env.ZHANGLING_MOOD_KV.get('push_subscriptions');
+  const subJson = await env.ZHANGLING_KV.get('push_subscriptions');
   if (!subJson) {
     return new Response(JSON.stringify({ error: 'no subscription' }), { status: 404, headers: { 'Content-Type': 'application/json', ...CORS } });
   }

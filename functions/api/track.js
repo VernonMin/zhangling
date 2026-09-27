@@ -25,12 +25,12 @@ export async function onRequestPost({ env, request }) {
 
     const entry = { event, page: page || 'index', time, device, city, region, country };
 
-    const existing = await env.ZHANGLING_MOOD_KV.get('track_events', 'json') || [];
+    const existing = await env.ZHANGLING_KV.get('track_events', 'json') || [];
     existing.push(entry);
     // 保留最近 2000 条
     if (existing.length > 2000) existing.splice(0, existing.length - 2000);
 
-    await env.ZHANGLING_MOOD_KV.put('track_events', JSON.stringify(existing));
+    await env.ZHANGLING_KV.put('track_events', JSON.stringify(existing));
 
     return new Response(JSON.stringify({ ok: true }), {
       headers: { 'Content-Type': 'application/json', ...CORS },

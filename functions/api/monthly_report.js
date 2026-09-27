@@ -41,7 +41,7 @@ export async function onRequestGet({ env, request }) {
   // 轻量预览模式：只返回心情数据，不调 AI
   const preview = url.searchParams.get('preview') === '1';
   if (preview) {
-    const allMoods = await env.ZHANGLING_MOOD_KV.get('moods', 'json') || [];
+    const allMoods = await env.ZHANGLING_KV.get('moods', 'json') || [];
     const moodData = allMoods.filter(m => m.date.startsWith(month));
     const recent = [...moodData].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 5);
     return new Response(JSON.stringify({
@@ -52,7 +52,7 @@ export async function onRequestGet({ env, request }) {
   }
 
   if (!regen) {
-    const cached = await env.ZHANGLING_MOOD_KV.get(`monthly_report:${month}`, 'json');
+    const cached = await env.ZHANGLING_KV.get(`monthly_report:${month}`, 'json');
     if (cached) {
       return new Response(JSON.stringify(cached), {
         headers: { 'Content-Type': 'application/json', ...CORS },
@@ -61,7 +61,7 @@ export async function onRequestGet({ env, request }) {
   }
 
   const report = await generateReport(env, month);
-  await env.ZHANGLING_MOOD_KV.put(`monthly_report:${month}`, JSON.stringify(report));
+  await env.ZHANGLING_KV.put(`monthly_report:${month}`, JSON.stringify(report));
 
   return new Response(JSON.stringify(report), {
     headers: { 'Content-Type': 'application/json', ...CORS },
@@ -70,18 +70,18 @@ export async function onRequestGet({ env, request }) {
 
 async function generateReport(env, month) {
   // 心情数据
-  const allMoods = await env.ZHANGLING_MOOD_KV.get('moods', 'json') || [];
+  const allMoods = await env.ZHANGLING_KV.get('moods', 'json') || [];
   const moodData = allMoods.filter(m => m.date.startsWith(month));
 
   // 罐子
-  const allJar = await env.ZHANGLING_MOOD_KV.get('jar_entries', 'json') || [];
+  const allJar = await env.ZHANGLING_KV.get('jar_entries', 'json') || [];
   const jarEntries = allJar.filter(e => e.date && e.date.startsWith(month));
 
   // 复盘笔记
-  const notesList = await env.ZHANGLING_MOOD_KV.list({ prefix: `note_${month}` });
+  const notesList = await env.ZHANGLING_KV.list({ prefix: `note_${month}` });
   const notes = [];
   for (const key of notesList.keys) {
-    const note = await env.ZHANGLING_MOOD_KV.get(key.name, 'json');
+    const note = await env.ZHANGLING_KV.get(key.name, 'json');
     if (note) notes.push({ ...note, date: key.name.replace('note_', '') });
   }
 

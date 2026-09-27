@@ -17,7 +17,7 @@ export async function onRequestOptions() {
 
 // GET：查询是否已抽过，返回结果
 export async function onRequestGet({ env }) {
-  const result = await env.ZHANGLING_MOOD_KV.get(KV_KEY, 'json');
+  const result = await env.ZHANGLING_KV.get(KV_KEY, 'json');
   return new Response(JSON.stringify(result || null), {
     headers: { 'Content-Type': 'application/json', ...CORS },
   });
@@ -25,7 +25,7 @@ export async function onRequestGet({ env }) {
 
 // POST：保存中奖结果（已抽过则拒绝）
 export async function onRequestPost({ request, env }) {
-  const existing = await env.ZHANGLING_MOOD_KV.get(KV_KEY, 'json');
+  const existing = await env.ZHANGLING_KV.get(KV_KEY, 'json');
   if (existing) {
     return new Response(JSON.stringify({ ok: false, reason: 'already_played' }), {
       headers: { 'Content-Type': 'application/json', ...CORS },
@@ -34,7 +34,7 @@ export async function onRequestPost({ request, env }) {
 
   const { prize } = await request.json();
   const record = { prize, time: beijingTime() };
-  await env.ZHANGLING_MOOD_KV.put(KV_KEY, JSON.stringify(record));
+  await env.ZHANGLING_KV.put(KV_KEY, JSON.stringify(record));
 
   return new Response(JSON.stringify({ ok: true, record }), {
     headers: { 'Content-Type': 'application/json', ...CORS },
