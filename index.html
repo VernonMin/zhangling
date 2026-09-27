@@ -112,6 +112,29 @@
     opacity: 1;
   }
 
+  /* 欢迎屏主标题 */
+  .splash-title {
+    font-size: 26px;
+    color: #c4756a;
+    font-weight: 500;
+    letter-spacing: 4px;
+    font-family: 'Noto Serif SC', serif;
+    margin-bottom: 18px;
+    animation: splashTitleIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;
+  }
+
+  @keyframes splashTitleIn {
+    from { opacity: 0; transform: translateY(-12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 780px) {
+    .splash-title {
+      font-size: 21px;
+      letter-spacing: 2px;
+    }
+  }
+
   @keyframes cdDotFloat {
     0%, 100% { transform: translateY(0) scale(1);    opacity: 0.5; }
     50%       { transform: translateY(-10px) scale(1.15); opacity: 0.75; }
@@ -2027,6 +2050,7 @@
 
 <!-- 欢迎屏 -->
 <div id="splash" onclick="dismissSplash()">
+  <p class="splash-line splash-title">张玲的专属夸夸机</p>
   <p class="splash-line splash-title-cd" id="splashTitleCd"></p>
   <img class="splash-dog" src="/bg.png" alt="欢迎页插画" />
   <p class="splash-line splash-greeting" id="splashGreeting"></p>
