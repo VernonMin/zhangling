@@ -1,1 +1,0 @@
-Cloudflare Pages Functions (Workers-style `onRequest*` exports), Cloudflare KV for persistence, DeepSeek chat API for AI-generated quotes, native Web Crypto API for RFC 8291/8292 Web Push encryption and ES256 VAPID signing, and a browser Service Worker for push delivery.

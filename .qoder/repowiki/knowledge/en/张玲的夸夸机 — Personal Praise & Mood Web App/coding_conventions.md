@@ -1,5 +1,0 @@
-- Each serverless function is a single-file module exporting `onRequestOptions`/`onRequestGet`/`onRequestPost` handlers, following Cloudflare Pages Functions conventions.
-- Every API handler defines a local `CORS` object with `Access-Control-Allow-Origin: *` and spreads it into response headers for both preflight and data responses.
-- Secrets and KV namespaces are accessed exclusively through the `env` parameter destructured from the handler context rather than global imports.
-- Frontend pages are self-contained HTML files embedding CSS and inline `<script>` blocks, fetching data via relative `/api/*` paths instead of hard-coded hostnames.
-- Push payloads are encrypted client-side using the Web Push protocol (ECDH + AES-GCM) and authenticated with an ES256 VAPID JWT before being POSTed to the subscription endpoint.

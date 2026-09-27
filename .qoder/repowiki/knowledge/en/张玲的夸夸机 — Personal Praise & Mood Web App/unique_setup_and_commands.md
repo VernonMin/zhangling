@@ -1,1 +1,0 @@
-Requires Cloudflare Pages environment variables: `DEEPSEEK_API_KEY`, `PUSH_SECRET`, `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, plus a KV namespace bound as `ZHANGLING_MOOD_KV` containing a key `push_subscriptions` holding a JSON map of endpoint→subscription objects.

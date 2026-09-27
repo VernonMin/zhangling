@@ -1,1 +1,0 @@
-A single-page, Cloudflare Pages-deployed web app that generates AI compliments for Zhang Ling, tracks her mood and praise counts, and delivers encrypted Web Push notifications.
