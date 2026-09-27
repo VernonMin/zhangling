@@ -5,14 +5,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>张玲的夸夸机 </title>
-<link rel="preload" as="image" href="/shinchan_splash_clear.png">
+<link rel="preload" as="image" href="/bg.png">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
     min-height: 100vh;
-    background: radial-gradient(ellipse at center, #FDF8EE 0%, #F5EDD8 100%);
+    background: #F5EDD8 url("/dog_cd5.png") center / cover fixed no-repeat;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -33,7 +33,7 @@
   #splash {
     position: fixed;
     inset: 0;
-    background: radial-gradient(ellipse at center, #FDF8EE 0%, #F5EDD8 100%);
+    background: #F5EDD8 url("/bg.png") center / cover no-repeat;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -544,179 +544,6 @@
     animation: counterJiggle 0.4s ease;
   }
 
-  /* 左侧面板 */
-  .side-panel {
-    position: fixed;
-    left: 28px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255,255,255,0.88);
-    backdrop-filter: blur(12px);
-    border-radius: 24px;
-    padding: 22px 16px;
-    border: 2px solid rgba(255,200,230,0.6);
-    box-shadow: 0 4px 24px rgba(180,110,105,0.15);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    z-index: 10;
-    min-width: 76px;
-    opacity: 0;
-    transition: opacity 0.6s ease;
-  }
-
-  .side-panel.show { opacity: 1; }
-
-  .side-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-  }
-
-  .side-big-emoji { font-size: 26px; }
-
-  .side-val {
-    font-size: 28px;
-    font-weight: 800;
-    color: #c4756a;
-    line-height: 1;
-    transition: transform 0.15s ease;
-  }
-
-  .side-val.bump {
-    transform: scale(1.35);
-  }
-
-  .side-label {
-    font-size: 10px;
-    color: #c4a882;
-    letter-spacing: 0.5px;
-    white-space: nowrap;
-  }
-
-  .side-divider {
-    width: 32px;
-    height: 1.5px;
-    background: linear-gradient(90deg, transparent, #e0c8c4, transparent);
-    border-radius: 2px;
-  }
-
-  .side-mood-emoji {
-    font-size: 28px;
-    transition: transform 0.3s ease;
-  }
-
-  .side-mood-emoji.pop { transform: scale(1.4); }
-
-  /* 右侧历史面板 */
-  .history-panel {
-    position: fixed;
-    right: 28px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255,255,255,0.88);
-    backdrop-filter: blur(12px);
-    border-radius: 24px;
-    padding: 20px 16px;
-    border: 2px solid rgba(255,200,230,0.6);
-    box-shadow: 0 4px 24px rgba(180,110,105,0.15);
-    z-index: 10;
-    width: 130px;
-    max-height: 70vh;
-    overflow-y: auto;
-    opacity: 0;
-    transition: opacity 0.6s ease;
-    scrollbar-width: none;
-  }
-
-  .history-panel::-webkit-scrollbar { display: none; }
-  .history-panel.show { opacity: 1; }
-
-  .history-title {
-    font-size: 10px;
-    color: #c4a882;
-    letter-spacing: 1px;
-    text-align: center;
-    margin-bottom: 12px;
-  }
-
-  .history-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(245,198,232,0.4);
-  }
-
-  .history-item:last-child { border-bottom: none; }
-
-  .history-emoji { font-size: 22px; }
-
-  .history-mood {
-    font-size: 11px;
-    color: #6a4848;
-    font-weight: 600;
-  }
-
-  .history-date {
-    font-size: 10px;
-    color: #c4a882;
-    white-space: nowrap;
-  }
-
-  .history-count {
-    font-size: 10px;
-    color: #c4756a;
-  }
-
-  .history-empty {
-    font-size: 11px;
-    color: #c4a882;
-    text-align: center;
-    line-height: 1.8;
-    padding: 8px 0;
-  }
-
-  /* 手机内嵌历史 */
-  .mobile-history {
-    display: none;
-    margin-top: 24px;
-    padding-top: 20px;
-    border-top: 1.5px dashed #ecdcd8;
-  }
-
-  .mobile-history-title {
-    font-size: 12px;
-    color: #c4a882;
-    letter-spacing: 1px;
-    margin-bottom: 12px;
-    text-align: center;
-  }
-
-  .mobile-history-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-  }
-
-  .mobile-history-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-    background: #fdf6ec;
-    border-radius: 20px;
-    padding: 8px 4px;
-    border: 1.5px solid #e0c8c4;
-  }
-
-  .mobile-history-emoji { font-size: 20px; }
-  .mobile-history-mood { font-size: 10px; color: #6a4848; font-weight: 600; }
-  .mobile-history-date { font-size: 9px; color: #c4a882; }
-
   .bottom-links {
     display: flex;
     flex-wrap: wrap;
@@ -802,11 +629,6 @@
   }
 
 
-  @media (max-width: 780px) {
-    .side-panel { display: none; }
-    .history-panel { display: none; }
-    .mobile-history { display: none; }
-  }
 
   .greeting {
     font-size: 12px;
@@ -1338,10 +1160,6 @@
   }
   body.eye-care .quote-box {
     background: linear-gradient(135deg, #fdf6e3, #f9f0d0);
-  }
-  body.eye-care .side-panel,
-  body.eye-care .history-panel {
-    background: rgba(253, 249, 235, 0.92);
   }
   body.eye-care .reflect-panel {
     background: linear-gradient(160deg, #fdf6e3, #f9f0d0);
@@ -2344,30 +2162,9 @@
 <!-- 欢迎屏 -->
 <div id="splash" onclick="dismissSplash()">
   <p class="splash-line splash-title-cd" id="splashTitleCd"></p>
-  <img class="splash-dog" src="/shinchan_splash_clear.png" alt="欢迎页小新插画" />
   <p class="splash-line splash-greeting" id="splashGreeting"></p>
   <p class="splash-line splash-sub" id="splashSub"></p>
   <span class="splash-hint"><span class="pulse-dot"></span></span>
-</div>
-
-<!-- 左侧面板 -->
-<div class="side-panel" id="sidePanel">
-  <div class="side-item">
-    <span class="side-big-emoji">🐾</span>
-    <div class="side-val" id="sideCount">0</div>
-    <div class="side-label">今日被夸</div>
-  </div>
-  <div class="side-divider"></div>
-  <div class="side-item">
-    <span class="side-mood-emoji" id="sideMoodEmoji">🐾</span>
-    <div class="side-label" id="sideMoodLabel">今日心情</div>
-  </div>
-</div>
-
-<!-- 右侧历史面板 -->
-<div class="history-panel" id="historyPanel">
-  <div class="history-title">张玲的历史心情</div>
-  <div id="historyList"><div class="history-empty">加载中…</div></div>
 </div>
 
 <div class="paws" id="paws"></div>
@@ -2437,7 +2234,7 @@
   </div>
 
   <div class="bottom-links">
-    <button class="bottom-link-btn" onclick="openGameModal()">🎮 张玲的摸鱼小游戏</button>
+    <button class="bottom-link-btn" onclick="openGameModal()">🎮 夜班摸鱼小游戏</button>
   </div>
 
 
@@ -2464,20 +2261,10 @@
   </div>
 </div>
 
-<div class="bottom-modal-mask" id="historyModal" onclick="closeBottomModal('historyModal', event)">
-  <div class="bottom-modal-card">
-    <div class="bottom-modal-header">
-      <span class="bottom-modal-title">📖 张玲的历史心情</span>
-      <button class="bottom-modal-close" onclick="closeBottomModal('historyModal')">×</button>
-    </div>
-    <div class="mobile-history-grid" id="mobileHistoryList"></div>
-  </div>
-</div>
-
 <div class="bottom-modal-mask" id="gameModal" onclick="closeBottomModal('gameModal', event)">
   <div class="bottom-modal-card">
     <div class="bottom-modal-header">
-      <span class="bottom-modal-title" id="gameTitle">🎮 张玲的摸鱼小游戏</span>
+      <span class="bottom-modal-title" id="gameTitle">🎮 夜班摸鱼小游戏</span>
       <button class="bottom-modal-close" onclick="stopAllGames();closeBottomModal('gameModal')">×</button>
     </div>
 
@@ -2632,7 +2419,6 @@ let count = 0;
 function setCount(n) {
   count = n;
   document.getElementById('count').textContent = n;
-  updateSideCount(n);
 }
 
 async function initCount() {
@@ -2666,11 +2452,6 @@ function openIeltsModal() {
   return;
 }
 
-function openHistoryModal() {
-  document.getElementById('historyModal').classList.add('show');
-}
-
-
 function openGameModal() {
   document.getElementById('gameModal').classList.add('show');
   showGameMenu();
@@ -2684,7 +2465,7 @@ function showGameMenu() {
   document.getElementById('gameWhack').style.display = 'none';
   document.getElementById('gameBalloon').style.display = 'none';
   document.getElementById('gameMatch3').style.display = 'none';
-  document.getElementById('gameTitle').textContent = '🎮 张玲的摸鱼小游戏';
+  document.getElementById('gameTitle').textContent = '🎮 夜班摸鱼小游戏';
 }
 
 function startGame(type) {
@@ -3705,7 +3486,7 @@ function closeCdGift() {
 }
 
 const splashGreetings = [
-  { main: '来啦～', sub: '' },
+  { main: '', sub: '' },
 ];
 
 let splashDismissed = false;
@@ -3715,14 +3496,11 @@ function dismissSplash() {
   splashDismissed = true;
   const splash = document.getElementById('splash');
   const main = document.getElementById('main');
-  const panel = document.getElementById('sidePanel');
   splash.classList.add('hide');
   document.querySelectorAll('.cd-sparkle').forEach(el => el.remove());
   setTimeout(() => {
     splash.style.display = 'none';
     main.classList.add('show');
-    panel.classList.add('show');
-    document.getElementById('historyPanel').classList.add('show');
     setTimeout(() => { initPush(); }, 600);
 
     const g = document.getElementById('greeting');
@@ -3765,39 +3543,8 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  const dogImg = document.querySelector('.splash-dog');
-  function runSplash() {
-    dogImg.classList.add('ready');
-    setTimeout(() => document.getElementById('splashGreeting').classList.add('show'), 600);
-    setTimeout(() => document.getElementById('splashSub').classList.add('show'), 1100);
-  }
-  if (dogImg.complete && dogImg.naturalWidth > 0) {
-    runSplash();
-  } else {
-    dogImg.addEventListener('load', runSplash, { once: true });
-    dogImg.addEventListener('error', runSplash, { once: true });
-  }
 });
 
-// 左侧面板更新
-function updateSideCount(n) {
-  const el = document.getElementById('sideCount');
-  el.textContent = n;
-  el.classList.add('bump');
-  setTimeout(() => el.classList.remove('bump'), 200);
-}
-
-function updateSideMood(emoji, label) {
-  const emojiEl = document.getElementById('sideMoodEmoji');
-  const labelEl = document.getElementById('sideMoodLabel');
-  emojiEl.textContent = emoji;
-  labelEl.textContent = label;
-  emojiEl.classList.add('pop');
-  setTimeout(() => emojiEl.classList.remove('pop'), 350);
-}
-
-// 初始化左侧面板计数
-updateSideCount(count);
 
 // 儿童节活动初始化
 if (isChildrensDayActivity()) cdInit();
@@ -3832,39 +3579,10 @@ async function loadTodayMood() {
     const today = new Date(Date.now() + 8 * 60 * 60 * 1000).toISOString().slice(0, 10);
     const todayMood = moods.find(m => m.date === today);
     if (todayMood) {
-      updateSideMood(todayMood.emoji, todayMood.mood);
       setDogState(todayMood.mood);
     }
-    renderHistory(moods);
   } catch {
-    document.getElementById('historyList').innerHTML = '<div class="history-empty">暂无记录</div>';
   }
-}
-
-function renderHistory(moods) {
-  // 桌面端右侧面板
-  const list = document.getElementById('historyList');
-  if (!moods.length) {
-    list.innerHTML = '<div class="history-empty">还没有记录 🐾</div>';
-    document.getElementById('mobileHistoryList').innerHTML = '';
-    return;
-  }
-  list.innerHTML = moods.slice(0, 60).map(m => `
-    <div class="history-item">
-      <span class="history-emoji">${m.emoji || '🙂'}</span>
-      <span class="history-mood">${m.mood}</span>
-      <span class="history-date">${m.date.slice(5)}</span>
-    </div>
-  `).join('');
-
-  // 手机端网格
-  document.getElementById('mobileHistoryList').innerHTML = moods.slice(0, 60).map(m => `
-    <div class="mobile-history-item">
-      <span class="mobile-history-emoji">${m.emoji || '🙂'}</span>
-      <span class="mobile-history-mood">${m.mood}</span>
-      <span class="mobile-history-date">${m.date.slice(5)}</span>
-    </div>
-  `).join('');
 }
 
 loadTodayMood();

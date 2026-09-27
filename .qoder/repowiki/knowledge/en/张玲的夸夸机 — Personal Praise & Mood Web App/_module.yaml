@@ -1,0 +1,35 @@
+schema_version: 1
+module_path: ""
+title: 张玲的夸夸机 — Personal Praise & Mood Web App
+scope:
+    - .gitignore
+    - functions/
+    - index.html
+    - history.html
+    - push.html
+    - zhangling.html
+    - sw.js
+    - avatar.png
+    - bg.png
+    - bg2.png
+    - daoxiang.mp3
+    - dog_bg.jpg
+    - dog_cd1.png
+    - dog_cd2.png
+    - dog_cd3.png
+    - dog_cd4.png
+    - dog_cd5.png
+    - gaobaiqiqiu.mp3
+    - jiangnan.mp3
+    - shinchan_splash.png
+    - shinchan_splash_clear.png
+    - together.jpg
+    - wechat_qrcode.jpg
+    - wechat_search.png
+    - zuichibi.mp3
+    - 如愿-王菲.mp3
+    - 陈奕迅-富士山下.mp3
+    - 陪你度过漫长岁月.mp3
+source_files: []
+depends_on: []
+related_to: []
